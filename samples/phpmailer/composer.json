@@ -1,0 +1,11 @@
+{
+    "name": "abruno/phpmailer",
+    "autoload": {
+        "psr-4": {
+            "Abruno\\Phpmailer\\": "src/"
+        }
+    },
+    "require": {
+        "phpmailer/phpmailer": "^6.6"
+    }
+}

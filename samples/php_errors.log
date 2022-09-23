@@ -1,0 +1,59 @@
+[14-Aug-2022 16:52:34 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function someThing(), 0 passed in C:\projects\PHP-DOCKER-LIVE\src\empty.php on line 29 and exactly 1 expected in C:\projects\PHP-DOCKER-LIVE\src\empty.php:21
+Stack trace:
+#0 C:\projects\PHP-DOCKER-LIVE\src\empty.php(29): someThing()
+#1 {main}
+  thrown in C:\projects\PHP-DOCKER-LIVE\src\empty.php on line 21
+[14-Aug-2022 16:52:49 UTC] PHP Fatal error:  Uncaught TypeError: someThing(): Argument #1 ($something) must be of type bool, null given, called in C:\projects\PHP-DOCKER-LIVE\src\empty.php on line 29 and defined in C:\projects\PHP-DOCKER-LIVE\src\empty.php:21
+Stack trace:
+#0 C:\projects\PHP-DOCKER-LIVE\src\empty.php(29): someThing(NULL)
+#1 {main}
+  thrown in C:\projects\PHP-DOCKER-LIVE\src\empty.php on line 21
+[14-Aug-2022 16:53:10 UTC] PHP Fatal error:  Uncaught TypeError: someThing(): Argument #1 ($something) must be of type bool, null given, called in C:\projects\PHP-DOCKER-LIVE\src\empty.php on line 30 and defined in C:\projects\PHP-DOCKER-LIVE\src\empty.php:21
+Stack trace:
+#0 C:\projects\PHP-DOCKER-LIVE\src\empty.php(30): someThing(NULL)
+#1 {main}
+  thrown in C:\projects\PHP-DOCKER-LIVE\src\empty.php on line 21
+[15-Aug-2022 10:36:27 UTC] PHP Warning:  mail(): Failed to connect to mailserver at "localhost" port 25, verify your "SMTP" and "smtp_port" setting in php.ini or use ini_set() in C:\projects\PHP-DOCKER-LIVE\src\mail.php on line 11
+[15-Aug-2022 10:36:27 UTC] PHP Stack trace:
+[15-Aug-2022 10:36:27 UTC] PHP   1. {main}() C:\projects\PHP-DOCKER-LIVE\src\mail.php:0
+[15-Aug-2022 10:36:27 UTC] PHP   2. mail($to = 'antonio8101@gmail.com', $subject = 'My Subject', $message = 'Line 1\r\nLine 2\r\nLine 3') C:\projects\PHP-DOCKER-LIVE\src\mail.php:11
+[15-Aug-2022 14:39:31 UTC] PHP Warning:  mail(): Failed to connect to mailserver at "mysmtphost" port 25, verify your "SMTP" and "smtp_port" setting in php.ini or use ini_set() in C:\projects\PHP-DOCKER-LIVE\src\mail.php on line 13
+[15-Aug-2022 14:39:31 UTC] PHP Stack trace:
+[15-Aug-2022 14:39:31 UTC] PHP   1. {main}() C:\projects\PHP-DOCKER-LIVE\src\mail.php:0
+[15-Aug-2022 14:39:31 UTC] PHP   2. mail($to = 'antonio8101@gmail.com', $subject = 'My Subject', $message = 'Line 1\r\nLine 2\r\nLine 3') C:\projects\PHP-DOCKER-LIVE\src\mail.php:13
+[15-Aug-2022 14:40:05 UTC] PHP Warning:  mail(): Bad Message Return Path in C:\projects\PHP-DOCKER-LIVE\src\mail.php on line 13
+[15-Aug-2022 14:40:05 UTC] PHP Stack trace:
+[15-Aug-2022 14:40:05 UTC] PHP   1. {main}() C:\projects\PHP-DOCKER-LIVE\src\mail.php:0
+[15-Aug-2022 14:40:05 UTC] PHP   2. mail($to = 'antonio8101@gmail.com', $subject = 'My Subject', $message = 'Line 1\r\nLine 2\r\nLine 3') C:\projects\PHP-DOCKER-LIVE\src\mail.php:13
+[15-Aug-2022 14:42:55 UTC] PHP Warning:  mail(): Bad Message Return Path in C:\projects\PHP-DOCKER-LIVE\src\mail.php on line 13
+[15-Aug-2022 14:42:56 UTC] PHP Stack trace:
+[15-Aug-2022 14:42:56 UTC] PHP   1. {main}() C:\projects\PHP-DOCKER-LIVE\src\mail.php:0
+[15-Aug-2022 14:42:56 UTC] PHP   2. mail($to = 'antonio8101@gmail.com', $subject = 'My Subject', $message = 'Line 1\r\nLine 2\r\nLine 3') C:\projects\PHP-DOCKER-LIVE\src\mail.php:13
+[15-Aug-2022 15:47:16 UTC] PHP Warning:  mail(): Failed to connect to mailserver at "localhost" port 25, verify your "SMTP" and "smtp_port" setting in php.ini or use ini_set() in C:\projects\PHP-DOCKER-LIVE\src\mail.php on line 20
+[15-Aug-2022 15:47:16 UTC] PHP Stack trace:
+[15-Aug-2022 15:47:16 UTC] PHP   1. {main}() C:\projects\PHP-DOCKER-LIVE\src\mail.php:0
+[15-Aug-2022 15:47:16 UTC] PHP   2. mail($to = '6382564394-f13b79+1@inbox.mailtrap.io', $subject = 'My Subject', $message = 'Line 1\r\nLine 2\r\nLine 3', $additional_headers = ['From' => 'antonio8101@gmail.com', 'Reply-To' => 'antonio8101@gmail.com', 'X-Mailer' => 'PHP/8.1.8']) C:\projects\PHP-DOCKER-LIVE\src\mail.php:20
+[15-Aug-2022 16:06:07 UTC] PHP Warning:  mail(): Failed to connect to mailserver at "smtp.wind.it" port 25, verify your "SMTP" and "smtp_port" setting in php.ini or use ini_set() in C:\projects\PHP-DOCKER-LIVE\src\mail.php on line 31
+[15-Aug-2022 16:06:07 UTC] PHP Stack trace:
+[15-Aug-2022 16:06:07 UTC] PHP   1. {main}() C:\projects\PHP-DOCKER-LIVE\src\mail.php:0
+[15-Aug-2022 16:06:07 UTC] PHP   2. mail($to = '6382564394-f13b79+1@inbox.mailtrap.io', $subject = 'My Subject', $message = 'Line 1\r\nLine 2\r\nLine 3', $additional_headers = ['From' => 'Doc Antonio Bruno <antonio8101@gmail.com>', 'Reply-To' => 'antonio8101@gmail.com', 'X-Mailer' => 'PHP/8.1.8']) C:\projects\PHP-DOCKER-LIVE\src\mail.php:31
+[15-Aug-2022 16:06:59 UTC] PHP Warning:  mail(): SMTP server response: 550 Authentication Required [smtp-33.iol.local; LIB_401] in C:\projects\PHP-DOCKER-LIVE\src\mail.php on line 31
+[15-Aug-2022 16:06:59 UTC] PHP Stack trace:
+[15-Aug-2022 16:06:59 UTC] PHP   1. {main}() C:\projects\PHP-DOCKER-LIVE\src\mail.php:0
+[15-Aug-2022 16:06:59 UTC] PHP   2. mail($to = '6382564394-f13b79+1@inbox.mailtrap.io', $subject = 'My Subject', $message = 'Line 1\r\nLine 2\r\nLine 3', $additional_headers = ['From' => 'Doc Antonio Bruno <antonio8101@gmail.com>', 'Reply-To' => 'antonio8101@gmail.com', 'X-Mailer' => 'PHP/8.1.8']) C:\projects\PHP-DOCKER-LIVE\src\mail.php:31
+[15-Sep-2022 14:44:24 UTC] PHP Warning:  mail(): "sendmail_from" not set in php.ini or custom "From:" header missing in C:\projects\NOTES\PHP-Notes\samples\mail.php on line 97
+[15-Sep-2022 14:44:24 UTC] PHP Stack trace:
+[15-Sep-2022 14:44:24 UTC] PHP   1. {main}() C:\projects\NOTES\PHP-Notes\samples\mail.php:0
+[15-Sep-2022 14:44:24 UTC] PHP   2. mail($to = 'antonio.bruno@infosfera.cloud', $subject = 'Birthday Reminders for August', $message = '\r\n<html>\r\n<head>\r\n  <title>Birthday Reminders for August</title>\r\n</head>\r\n<body>\r\n  <p>Here are the birthdays upcoming in August!</p>\r\n  <table>\r\n    <tr>\r\n      <th>Person</th><th>Day</th><th>Month</th><th>Year</th>\r\n    </tr>\r\n    <tr>\r\n      <td>Johny</td><td>10th</td><td>August</td><td>1970</td>\r\n    </tr>\r\n    <tr>\r\n      <td>Sally</td><td>17th</td><td>August</td><td>1973</td>\r\n    </tr>\r\n  </table>\r\n</body>\r\n</html>\r\n', $additional_headers = 'John Doe / Sender <antonio8101@gmail.com>\r\nPHP/8.1.8\r\nMIME-Version: 1.0\r\nContent-type: text/html; charset=iso-8859-1\r\nX-Mailer: PHP/8.1.8') C:\projects\NOTES\PHP-Notes\samples\mail.php:97
+[15-Sep-2022 14:50:40 UTC] PHP Warning:  mail(): "sendmail_from" not set in php.ini or custom "From:" header missing in C:\projects\NOTES\PHP-Notes\samples\mail.php on line 97
+[15-Sep-2022 14:50:40 UTC] PHP Stack trace:
+[15-Sep-2022 14:50:40 UTC] PHP   1. {main}() C:\projects\NOTES\PHP-Notes\samples\mail.php:0
+[15-Sep-2022 14:50:40 UTC] PHP   2. mail($to = 'antonio.bruno@infosfera.cloud', $subject = 'Birthday Reminders for August', $message = '\r\n<html>\r\n<head>\r\n  <title>Birthday Reminders for August</title>\r\n</head>\r\n<body>\r\n  <p>Here are the birthdays upcoming in August!</p>\r\n  <table>\r\n    <tr>\r\n      <th>Person</th><th>Day</th><th>Month</th><th>Year</th>\r\n    </tr>\r\n    <tr>\r\n      <td>Johny</td><td>10th</td><td>August</td><td>1970</td>\r\n    </tr>\r\n    <tr>\r\n      <td>Sally</td><td>17th</td><td>August</td><td>1973</td>\r\n    </tr>\r\n  </table>\r\n</body>\r\n</html>\r\n', $additional_headers = 'Content-type: text/html; charset=iso-8859-1') C:\projects\NOTES\PHP-Notes\samples\mail.php:97
+[20-Sep-2022 14:57:15 UTC] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:8081 (through xdebug.client_host/xdebug.client_port) :-(
+[20-Sep-2022 14:57:59 UTC] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:8081 (through xdebug.client_host/xdebug.client_port) :-(
+[20-Sep-2022 14:58:15 UTC] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:8081 (through xdebug.client_host/xdebug.client_port) :-(
+[20-Sep-2022 14:58:18 UTC] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:8081 (through xdebug.client_host/xdebug.client_port) :-(
+[20-Sep-2022 14:58:37 UTC] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:8081 (through xdebug.client_host/xdebug.client_port) :-(
+[20-Sep-2022 14:58:47 UTC] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:8081 (through xdebug.client_host/xdebug.client_port) :-(
+[20-Sep-2022 14:59:18 UTC] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:8081 (through xdebug.client_host/xdebug.client_port) :-(
+[20-Sep-2022 14:59:30 UTC] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:8081 (through xdebug.client_host/xdebug.client_port) :-(

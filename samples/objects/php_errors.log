@@ -1,0 +1,7 @@
+[14-Aug-2022 15:12:13 UTC] PHP Fatal error:  Uncaught Error: Class "Car" not found in C:\projects\PHP-DOCKER-LIVE\src\objects\cloning.php:140
+Stack trace:
+#0 C:\projects\PHP-DOCKER-LIVE\src\objects\cloning.php(159): CarFactory::getCar(1, 'Max', 'Verstappen', Object(Country), Object(RacingTeam), Object(Country), Object(Manufacturer))
+#1 C:\projects\PHP-DOCKER-LIVE\src\objects\cloning.php(147): RaceFactory::getCars()
+#2 C:\projects\PHP-DOCKER-LIVE\src\objects\cloning.php(382): RaceFactory::getRace('Monza', Object(Country))
+#3 {main}
+  thrown in C:\projects\PHP-DOCKER-LIVE\src\objects\cloning.php on line 140

@@ -1,0 +1,24 @@
+[08-Sep-2022 14:39:42 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function getPrimeNumbers() in C:\inetpub\wwwroot\esercizi\primeNumbers.php:35
+Stack trace:
+#0 {main}
+  thrown in C:\inetpub\wwwroot\esercizi\primeNumbers.php on line 35
+[13-Sep-2022 18:00:00 UTC] PHP Warning:  Array to string conversion in C:\inetpub\wwwroot\esercizi\addresses.php on line 27
+[13-Sep-2022 18:00:00 UTC] PHP Stack trace:
+[13-Sep-2022 18:00:00 UTC] PHP   1. {main}() C:\inetpub\wwwroot\esercizi\addresses.php:0
+[13-Sep-2022 18:00:00 UTC] PHP   2. printAddress($rowData = [0 => 'via tal dei tali 1, 20100 Milano (MI) Italia', 1 => [0 => 'via tal dei tali 2', 1 => 'Genova', 2 => '(GE)', 3 => '10000', 4 => 'Italia'], 2 => 2, 3 => NULL, 4 => class stdClass {  }, 5 => [0 => 'Mario', 1 => 'Rossi']]) C:\inetpub\wwwroot\esercizi\addresses.php:47
+[13-Sep-2022 18:00:00 UTC] PHP   3. implode($separator = '\r\n', $array = [0 => 'via tal dei tali 1, 20100 Milano (MI) Italia', 1 => [0 => 'via tal dei tali 2', 1 => 'Genova', 2 => '(GE)', 3 => '10000', 4 => 'Italia']]) C:\inetpub\wwwroot\esercizi\addresses.php:27
+[13-Sep-2022 18:00:40 UTC] PHP Warning:  Array to string conversion in C:\inetpub\wwwroot\esercizi\addresses.php on line 27
+[13-Sep-2022 18:00:40 UTC] PHP Stack trace:
+[13-Sep-2022 18:00:40 UTC] PHP   1. {main}() C:\inetpub\wwwroot\esercizi\addresses.php:0
+[13-Sep-2022 18:00:40 UTC] PHP   2. printAddress($rowData = [0 => 'via tal dei tali 1, 20100 Milano (MI) Italia', 1 => [0 => 'via tal dei tali 2', 1 => 'Genova', 2 => '(GE)', 3 => '10000', 4 => 'Italia'], 2 => 2, 3 => NULL, 4 => class stdClass {  }, 5 => [0 => 'Mario', 1 => 'Rossi']]) C:\inetpub\wwwroot\esercizi\addresses.php:47
+[13-Sep-2022 18:00:40 UTC] PHP   3. implode($separator = '\n', $array = [0 => 'via tal dei tali 1, 20100 Milano (MI) Italia', 1 => [0 => 'via tal dei tali 2', 1 => 'Genova', 2 => '(GE)', 3 => '10000', 4 => 'Italia']]) C:\inetpub\wwwroot\esercizi\addresses.php:27
+[13-Sep-2022 18:01:05 UTC] PHP Warning:  Array to string conversion in C:\inetpub\wwwroot\esercizi\addresses.php on line 29
+[13-Sep-2022 18:01:05 UTC] PHP Stack trace:
+[13-Sep-2022 18:01:05 UTC] PHP   1. {main}() C:\inetpub\wwwroot\esercizi\addresses.php:0
+[13-Sep-2022 18:01:05 UTC] PHP   2. printAddress($rowData = [0 => 'via tal dei tali 1, 20100 Milano (MI) Italia', 1 => [0 => 'via tal dei tali 2', 1 => 'Genova', 2 => '(GE)', 3 => '10000', 4 => 'Italia'], 2 => 2, 3 => NULL, 4 => class stdClass {  }, 5 => [0 => 'Mario', 1 => 'Rossi']]) C:\inetpub\wwwroot\esercizi\addresses.php:49
+[13-Sep-2022 18:01:05 UTC] PHP   3. implode($separator = '\n', $array = [0 => 'via tal dei tali 1, 20100 Milano (MI) Italia', 1 => [0 => 'via tal dei tali 2', 1 => 'Genova', 2 => '(GE)', 3 => '10000', 4 => 'Italia']]) C:\inetpub\wwwroot\esercizi\addresses.php:29
+[20-Sep-2022 12:51:18 UTC] PHP Fatal error:  Uncaught Exception: test in C:\projects\NOTES\PHP-Notes\exercises\date.php:29
+Stack trace:
+#0 C:\projects\NOTES\PHP-Notes\exercises\date.php(41): birthdayCountdown(Object(DateTime))
+#1 {main}
+  thrown in C:\projects\NOTES\PHP-Notes\exercises\date.php on line 29

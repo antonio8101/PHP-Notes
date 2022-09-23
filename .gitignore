@@ -1,0 +1,11 @@
+/.idea/
+localhost/.idea
+
+/vendor/
+*/vendor/
+*/*/vendor/
+*/uploads/
+/localhost/samples/forms/php_errors.log
+/samples/phpmailer/src/php_errors.log
+/localhost/contacts/uploads/
+/localhost/contacts/inc/php_errors.log
