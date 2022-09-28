@@ -17,4 +17,5 @@ ALTER TABLE contacts ADD FULLTEXT (name);
 ALTER TABLE contacts ADD FULLTEXT (surname);
 ALTER TABLE contacts ADD FULLTEXT (email);
 ALTER TABLE contacts ADD FULLTEXT (name,surname,email);
+# FULLTEXT info https://typesense.org/learn/full-text-search-mysql/
 ALTER TABLE contacts ADD CONSTRAINT UNIQUE(email);
