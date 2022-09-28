@@ -9,7 +9,7 @@
  *
  * @return bool
  */
-function mysqliCreateContact(mysqli $db, array $params): bool {
+function mysqliCreateContact( mysqli $db, array $params ): bool {
 
 	try {
 
@@ -25,7 +25,7 @@ function mysqliCreateContact(mysqli $db, array $params): bool {
 		$role         = array_key_exists( 'role', $params ) ? $params['role'] : null;
 		$picture      = array_key_exists( 'picture', $params ) ? $params['picture'] : null;
 
-		$statement->execute([
+		$statement->execute( [
 			$name,
 			$phone_number,
 			$email,
@@ -33,14 +33,14 @@ function mysqliCreateContact(mysqli $db, array $params): bool {
 			$company,
 			$role,
 			$picture
-		]);
+		] );
 
 		return true;
 
-	} catch (Exception $e){
+	} catch ( Exception $e ) {
 
-		var_dump($e->getMessage());
-		var_dump($params);
+		addErrorToLog( $e->getMessage() );
+		addErrorToLog( implode(',', $params) );
 
 		return false;
 

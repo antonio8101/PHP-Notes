@@ -39,8 +39,8 @@ function createContact(PDO $db, array $params): bool {
 
 	} catch (Exception $e){
 
-		var_dump($e->getMessage());
-		var_dump($params);
+		addErrorToLog($e->getMessage());
+		addErrorToLog($params);
 
 		return false;
 

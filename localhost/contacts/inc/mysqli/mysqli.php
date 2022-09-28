@@ -11,12 +11,13 @@
  *
  * @return mysqli|null
  */
-function connectMySQLi(string $host, string $port, string $user, string $password, string $db): ?mysqli {
+function connectMySQLi( string $host, string $port, string $user, string $password, string $db ): ?mysqli {
 	try {
-		return new mysqli($host, $user, $password, $db, $port);
-	} catch (Exception $exception){
+		return new mysqli( $host, $user, $password, $db, $port );
+	} catch ( Exception $exception ) {
 
-		var_dump($exception->getMessage());
+		addErrorToLog( $exception->getMessage() );
+		addErrorToLog( func_get_args() );
 
 		return null;
 	}
@@ -29,6 +30,6 @@ function connectMySQLi(string $host, string $port, string $user, string $passwor
  *
  * @return void
  */
-function closeMySQLi(mysqli $db): void {
+function closeMySQLi( mysqli $db ): void {
 	$db->close();
 }

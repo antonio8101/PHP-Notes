@@ -9,7 +9,7 @@ function startSession( ?array $initialSessionData = null ): void {
 		}
 	}
 
-	var_dump($_SESSION);
+//	var_dump($_SESSION);
 
 }
 

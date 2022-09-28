@@ -1,0 +1,67 @@
+input[type=submit] {
+    width: 100%;
+}
+
+.create-form {
+    width: 500px;
+}
+
+.card-container {
+    display: flex;
+    justify-content: center;
+}
+
+.centered {
+    text-align: center;
+}
+
+.bi-check-circle-fill {
+    color: green;
+    font-size: 10em;
+}
+
+.icon-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.profile-pic img{
+    border-radius: 50%;
+    width: 70px;
+    margin-right: 10px;
+}
+
+.form-buttons a{
+    display: block;
+    flex: 1;
+}
+.form-buttons input{
+    display: block;
+    flex: 1;
+}
+.error-log{
+    font-size: 10px;
+    font-style: italic;
+}
+
+.create-btn a{
+    position: fixed;
+    right: 2em;
+    bottom: 2em;
+    background-color: #ea168e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    color: #fafafa;
+    font-size: 2em;
+    box-shadow: 5px 5px 7px #888888;
+}
+
+.create-btn a:hover{
+    background-color: #1100ff;
+}

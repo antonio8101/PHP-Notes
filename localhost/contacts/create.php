@@ -1,18 +1,20 @@
 <?php
 
 require_once "inc/config.inc.php";
-require_once "inc/pdo/pdo.php";
-require_once "inc/pdo/command.php";
-//require_once "inc/mysqli/mysqli.php";
-//require_once "inc/mysqli/command.php";
+require_once "inc/helper.inc.php";
+// require_once "inc/pdo/pdo.php";
+// require_once "inc/pdo/command.php";
+require_once "inc/mysqli/mysqli.php";
+require_once "inc/mysqli/command.php";
 require_once "inc/session.php";
 
 if ( function_exists( 'startSession' ) ) {
 	startSession( $_POST );
 }
 
-$invalidFields = getInvalidFields( $_POST );
-$isOk          = ! ( count( $invalidFields ) > 0 );
+$invalidFields  = getInvalidFields( $_POST );
+$isOk           = ! ( count( $invalidFields ) > 0 );
+$contactCreated = true;
 
 if ( $isOk && isProcessingForm() ) {
 	$_POST['picture'] = uploadImage( $_FILES );
@@ -21,12 +23,10 @@ if ( $isOk && isProcessingForm() ) {
 		$contactCreated = createContactWithPDO( $_POST );
 	} elseif ( function_exists( 'connectMySQLi' ) ) {
 		$contactCreated = createContactWithMySQLi( $_POST );
-	} else {
-		$contactCreated = true;
 	}
 
 	if ( function_exists( 'endSession' ) ) {
-		endSession();
+        endSession();
 	}
 }
 
@@ -37,10 +37,10 @@ function uploadImage( array $files ): ?string {
 		$extension        = $originalFileName[ count( $originalFileName ) - 1 ];
 		$guid             = getSomethingLikeGuid( true );
 		$fileName         = "{$guid}.{$extension}";
-        $uploadFolder     = "uploads";
+		$uploadFolder     = "uploads";
 		$path             = "uploads/{$fileName}";
 
-		makeDirectoryIfNotExists($uploadFolder);
+		makeDirectoryIfNotExists( $uploadFolder );
 
 		move_uploaded_file( $files['profilePic']['tmp_name'], $path );
 
@@ -54,16 +54,16 @@ function uploadImage( array $files ): ?string {
 
 		return $path;
 	} catch ( Exception $exception ) {
-		var_dump( $exception->getMessage() );
+		//var_dump( $exception->getMessage() );
 
 		return null;
 	}
 }
 
-function makeDirectoryIfNotExists(string $path): void {
-    if (!is_dir($path)){
-        mkdir($path, 0777, true);
-    }
+function makeDirectoryIfNotExists( string $path ): void {
+	if ( ! is_dir( $path ) ) {
+		mkdir( $path, 0777, true );
+	}
 }
 
 function isWindowsServer(): bool {
@@ -103,6 +103,10 @@ function getInvalidFields( $post ): array {
 			$invalidFields[ $key ] = $value;
 		}
 	}
+
+    if (count($invalidFields) > 0){
+        addErrorToLog('There are some invalid fields...');
+    }
 
 	return $invalidFields;
 }
@@ -212,47 +216,19 @@ function createContactWithMySQLi( array $params ): bool {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Create</title>
+    <title><?= getPageTitle() ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
             crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-    <style>
-        input[type=submit] {
-            width: 100%;
-        }
-
-        .create-form {
-            width: 500px;
-        }
-
-        .card-container {
-            display: flex;
-            justify-content: center;
-        }
-
-        .centered {
-            text-align: center;
-        }
-
-        .bi-check-circle-fill {
-            color: green;
-            font-size: 10em;
-        }
-
-        .icon-container {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-        }
-    </style>
+    <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
 <div class="container">
 	<?php
-	if ( isProcessingForm() && $isOk ): ?>
+	if ( isProcessingForm() && $isOk && $contactCreated ): ?>
 
         <div class="card-container ">
             <div class="create-form card m-3">
@@ -265,6 +241,8 @@ function createContactWithMySQLi( array $params ): bool {
             </div>
         </div>
         <div class="centered"><a href="<?= $_SERVER['PHP_SELF'] ?>">Inserisci un nuovo contatto</a></div>
+        <div class="centered"><a href="list.php">Lista contatti</a></div>
+
 
 	<?php else: ?>
 
@@ -272,9 +250,10 @@ function createContactWithMySQLi( array $params ): bool {
             <div class="create-form card m-3">
                 <div class="card-body">
 
-					<?php if ( ! $isOk ): ?>
+					<?php if ( ! $isOk || ! $contactCreated ): ?>
                         <div class="alert alert-danger" role="alert">
-                            Inserimento fallito!
+                            <p>Inserimento fallito!</p>
+                            <p class="error-log"><?=getLog()?></p>
                         </div>
 					<?php endif; ?>
 
@@ -326,8 +305,9 @@ function createContactWithMySQLi( array $params ): bool {
                                    id="birthdate"
                                    oninput="removeInvalid(this)" placeholder="Data di Nascita">
                         </div>
-                        <div class="mt-3 d-flex">
-                            <input type="submit" class="btn btn-primary" value="Crea"/>
+                        <div class="form-buttons mt-3 d-flex">
+                            <a href="list.php" class="btn btn-secondary m-1 flex-1">Cancel</a>
+                            <input type="submit" class="btn btn-primary m-1 flex-1" value="Crea"/>
                         </div>
                     </form>
                 </div>
@@ -350,3 +330,4 @@ function createContactWithMySQLi( array $params ): bool {
         crossorigin="anonymous"></script>
 </body>
 </html>
+<?php unset($_SESSION['errors']);  ?>
