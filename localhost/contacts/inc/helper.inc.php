@@ -1,5 +1,7 @@
 <?php
 
+use JetBrains\PhpStorm\NoReturn;
+
 function hasData( ?string $str ): bool {
 
 	if ( is_null( $str ) ) {
@@ -47,4 +49,15 @@ function getLog(): string{
 	}
 
 	return implode('<br>', $_SESSION['errors']);
+}
+
+#[NoReturn]
+function dieWith404(): void {
+	$headerContent = $_SERVER['SERVER_PROTOCOL'] . " 404 Not Found";
+
+	header( $headerContent );
+
+	include "404.php";
+
+	die();
 }

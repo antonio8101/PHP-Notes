@@ -40,10 +40,31 @@ function mysqliCreateContact( mysqli $db, array $params ): bool {
 	} catch ( Exception $e ) {
 
 		addErrorToLog( $e->getMessage() );
-		addErrorToLog( implode(',', $params) );
+		addErrorToLog( implode( ',', $params ) );
 
 		return false;
 
 	}
 
+}
+
+function deleteContact( mysqli $db, string $contactId ): bool {
+
+	try {
+		$statement = $db->prepare( "UPDATE contacts SET active = 0 WHERE id = ?" );
+
+		$statement->execute( [
+			$contactId
+		] );
+
+		return true;
+
+	} catch ( Exception $e ) {
+
+		addErrorToLog( $e->getMessage() );
+		addErrorToLog( implode( ',', $params ) );
+
+		return false;
+
+	}
 }
