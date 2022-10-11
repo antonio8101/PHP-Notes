@@ -2,7 +2,7 @@
 
 ## Significato
 
-La logica di alto livello (business logic) non dovrebbe dipende dalla logica di basso livello (tipo database, I/O, ecc..).
+La logica di alto livello (business logic) non dovrebbe dipendere dalla logica di basso livello (tipo database, I/O, ecc..).
 Entrambe devono dipendere da astrazioni. Le astrazioni non devono dipendere dai dettagli, i dettagli devono dipendere dalle astrazioni.
 
 ## Code smell?

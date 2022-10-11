@@ -57,6 +57,8 @@ enum Country {
 
 class Car {
 
+
+	public int $state = 0;
 	private int $number;
 	private Driver $driver;
 	private RacingTeam $racing_team;
@@ -74,8 +76,9 @@ class Car {
 
 		$team = $this->racing_team->getFlag()->name;
 		$engine = $this->engine->getManufacturer()->name;
+		$rtCountry = $this->getRacingTeam()->getCountry()->name;
 
-		return "$this->driver :: $this->number, $team ($engine)";
+		return "$this->driver :: $this->number, $team ($engine) :: $rtCountry";
 	}
 
 	public function setNewDriver($number, $name, $surname, $country): void{
@@ -91,6 +94,16 @@ class Car {
 
 	public function __clone(): void {
 		$this->driver = clone $this->driver;
+		$this->driver->setName('Default');
+		$this->driver->setSurname('Default');
+		$this->driver->setCountry(Country::Italy);
+	}
+
+	/**
+	 * @return RacingTeam
+	 */
+	public function getRacingTeam(): RacingTeam {
+		return $this->racing_team;
 	}
 }
 
@@ -117,6 +130,13 @@ class RacingTeam {
 	 */
 	public function getCountry(): Country {
 		return $this->country;
+	}
+
+	/**
+	 * @param Country $country
+	 */
+	public function setCountry( Country $country ): void {
+		$this->country = $country;
 	}
 
 }
@@ -195,13 +215,12 @@ class CarFactory {
 		string $name,
 		string $surname,
 		Country $driverCountry,
-		RacingTeamFlag $racingTeam,
-		Country $carCountry,
+		RacingTeam $racingTeam,
 		Manufacturer $manufacturer
 	): Car {
 
 		$driver     = new Driver( $name, $surname, $driverCountry );
-		$racingTeam = new RacingTeam( $racingTeam, $carCountry );
+//		$racingTeam = new RacingTeam( $racingTeam, $carCountry );
 		$engine     = new Engine( $manufacturer );
 
 		return new Car( $number, $driver, $racingTeam, $engine );
@@ -222,7 +241,6 @@ class RaceFactory {
 				"Verstappen",
 				Country::NetherLands,
 				RacingTeamFlag::RedBull,
-				Country::Austria,
 				Manufacturer::RedBull
 			),
 			CarFactory::getCar(
@@ -231,7 +249,6 @@ class RaceFactory {
 				"Leclerc",
 				Country::Monaco,
 				RacingTeamFlag::Ferrari,
-				Country::Italy,
 				Manufacturer::Ferrari
 			),
 			CarFactory::getCar(
@@ -240,7 +257,6 @@ class RaceFactory {
 				"Perez",
 				Country::Mexico,
 				RacingTeamFlag::RedBull,
-				Country::Austria,
 				Manufacturer::Ferrari
 			),
 			CarFactory::getCar(
@@ -249,7 +265,6 @@ class RaceFactory {
 				"Russel",
 				Country::UnitedKingdom,
 				RacingTeamFlag::Mercedes,
-				Country::Germany,
 				Manufacturer::Mercedes
 			),
 			CarFactory::getCar(
@@ -258,7 +273,6 @@ class RaceFactory {
 				"Sainz",
 				Country::Spain,
 				RacingTeamFlag::Ferrari,
-				Country::Italy,
 				Manufacturer::Ferrari
 			),
 			CarFactory::getCar(
@@ -267,7 +281,6 @@ class RaceFactory {
 				"Hamilton",
 				Country::UnitedKingdom,
 				RacingTeamFlag::Mercedes,
-				Country::Germany,
 				Manufacturer::Mercedes
 			),
 			CarFactory::getCar(
@@ -276,7 +289,6 @@ class RaceFactory {
 				"Norris",
 				Country::UnitedKingdom,
 				RacingTeamFlag::McLaren,
-				Country::UnitedKingdom,
 				Manufacturer::Mercedes
 			),
 			CarFactory::getCar(
@@ -285,7 +297,6 @@ class RaceFactory {
 				"Ocon",
 				Country::France,
 				RacingTeamFlag::Alpine,
-				Country::France,
 				Manufacturer::Renault
 			),
 			CarFactory::getCar(
@@ -294,7 +305,6 @@ class RaceFactory {
 				"Bottas",
 				Country::Finland,
 				RacingTeamFlag::AlfaRomeo,
-				Country::Italy,
 				Manufacturer::Ferrari
 			),
 			CarFactory::getCar(
@@ -303,7 +313,6 @@ class RaceFactory {
 				"Alonso",
 				Country::Spain,
 				RacingTeamFlag::Alpine,
-				Country::France,
 				Manufacturer::Renault
 			),
 			CarFactory::getCar(
@@ -312,7 +321,6 @@ class RaceFactory {
 				"Magnussen",
 				Country::Denmark,
 				RacingTeamFlag::Haas,
-				Country::Italy,
 				Manufacturer::Ferrari
 			),
 			CarFactory::getCar(
@@ -321,7 +329,6 @@ class RaceFactory {
 				"Ricciardo",
 				Country::Australia,
 				RacingTeamFlag::McLaren,
-				Country::UnitedKingdom,
 				Manufacturer::Mercedes
 			),
 			CarFactory::getCar(
@@ -330,7 +337,6 @@ class RaceFactory {
 				"Gasly",
 				Country::France,
 				RacingTeamFlag::AlphaTauri,
-				Country::Italy,
 				Manufacturer::RedBull
 			),
 			CarFactory::getCar(
@@ -339,7 +345,6 @@ class RaceFactory {
 				"Vettel",
 				Country::Germany,
 				RacingTeamFlag::AstonMartin,
-				Country::UnitedKingdom,
 				Manufacturer::Mercedes
 			),
 			CarFactory::getCar(
@@ -348,7 +353,6 @@ class RaceFactory {
 				"Schumacher",
 				Country::Germany,
 				RacingTeamFlag::Haas,
-				Country::Italy,
 				Manufacturer::Ferrari
 			),
 			CarFactory::getCar(
@@ -357,7 +361,6 @@ class RaceFactory {
 				"Tsunoda",
 				Country::Japan,
 				RacingTeamFlag::AlphaTauri,
-				Country::Italy,
 				Manufacturer::Ferrari
 			),
 			CarFactory::getCar(
@@ -366,7 +369,6 @@ class RaceFactory {
 				"Guanyu",
 				Country::China,
 				RacingTeamFlag::AlfaRomeo,
-				Country::Italy,
 				Manufacturer::Ferrari
 			),
 			CarFactory::getCar(
@@ -375,7 +377,6 @@ class RaceFactory {
 				"Albon",
 				Country::Thailand,
 				RacingTeamFlag::Williams,
-				Country::UnitedKingdom,
 				Manufacturer::Mercedes
 			),
 			CarFactory::getCar(
@@ -384,7 +385,6 @@ class RaceFactory {
 				"Latifi",
 				Country::Canada,
 				RacingTeamFlag::Williams,
-				Country::UnitedKingdom,
 				Manufacturer::Mercedes
 			),
 			CarFactory::getCar(
@@ -393,7 +393,6 @@ class RaceFactory {
 				"Hulkenberg",
 				Country::Germany,
 				RacingTeamFlag::AstonMartin,
-				Country::UnitedKingdom,
 				Manufacturer::Mercedes
 			),
 		];
@@ -448,14 +447,14 @@ class Race {
 
 
 # Cloning Showcase
+$ferrari = new RacingTeam(RacingTeamFlag::Ferrari, Country::Italy);
 
 $car0 = CarFactory::getCar(
 	16,
 	"Charles",
 	"Leclerc",
 	Country::Monaco,
-	RacingTeamFlag::Ferrari,
-	Country::Italy,
+	$ferrari,
 	Manufacturer::Ferrari
 );
 
@@ -482,6 +481,18 @@ echo displayCar($car0);
 echo displayCar($car1);
 
 
+echo "::: \$car0 COUNTRY CHANGED TOO!!! (because it is not handled in the __clone() implementation)" . PHP_EOL;
+echo PHP_EOL;
+$ferrari->setCountry(Country::France);
+echo displayCar($car0);
+echo displayCar($car1);
+
+
 function displayCar(string $car): string{
 	return " - " . $car . PHP_EOL;
 }
+
+echo get_class($ferrari) . PHP_EOL;
+echo method_exists($ferrari, 'get') ? 'si' : 'no';
+var_dump(get_object_vars($car0));
+var_dump(get_class_methods(RacingTeam::class));

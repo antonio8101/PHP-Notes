@@ -2,32 +2,22 @@
 
 require_once "inc/config.inc.php";
 require_once "inc/helper.inc.php";
+require_once "templates.php";
 require_once "inc/mysqli/mysqli.php";
 require_once "inc/mysqli/query.php";
+
+require_once "inc/session.php";
+
+require_once "inc/common.php";
 
 $db          = connectMySQLi( DB_HOST, DB_PORT, DB_USER, DB_PASS, DB_NAME );
 $searchKey   = array_key_exists( 'search', $_GET ) ? $_GET['search'] : null;
 $queryResult = searchContacts( $db, $searchKey );
 
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title><?= getPageTitle() ?></title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
-            crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="assets/style.css">
-</head>
-<body>
-<div class="progress-container fixed-top">
-    <span class="progress-bar"></span>
-</div>
-<div class="container">
+
+<?= getPageHeader(getPageTitle()) ?>
+
     <div class="create-btn">
         <a href="create.php"><i class="bi bi-plus"></i></a>
     </div>
@@ -48,11 +38,16 @@ $queryResult = searchContacts( $db, $searchKey );
 						$surnameInitial     = substr( $row['surname'], 0, 1 );
 						$placeHolderContent = $nameInitial . $surnameInitial;
 
+                        if (!is_null($row['picture_id'])){
+	                        $image = getImage( $db, $row['picture_id'] );
+	                        $row['picture_id'] = $image['content'];
+                        }
+
 						?>
                         <a href="#" class="d-flex list-group-item list-group-item-action" aria-current="true">
                             <div class="profile-pic me-2">
-								<?php if ( ! is_null( $row['picture'] ) && strlen( $row['picture'] ) > 0 && file_exists( $row['picture'] ) ) : ?>
-                                    <img src="<?= $row['picture'] ?>" alt="pic-image">
+								<?php if ( ! is_null( $row['picture_id'] ) && strlen( $row['picture_id'] ) > 0) : ?>
+                                    <img src="data:image/jpeg;base64,<?= base64_encode($row['picture_id'] )?>" alt="pic-image">
 								<?php else: ?>
                                     <img src="https://via.placeholder.com/150/0000FF/808080?text=<?= $placeHolderContent ?>"
                                          alt="pic-image">
@@ -81,12 +76,8 @@ $queryResult = searchContacts( $db, $searchKey );
             </div>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-            integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
-            crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
-            integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz"
-            crossorigin="anonymous"></script>
+
+<?= getPageFooter(<<< heredoc
     <script>
 
         window.addEventListener('load', function () {
@@ -120,5 +111,4 @@ $queryResult = searchContacts( $db, $searchKey );
 
         const processChange = debounce((elm) => refreshList(elm));
     </script>
-</body>
-</html>
+heredoc) ?>

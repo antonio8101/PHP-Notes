@@ -49,3 +49,25 @@ function getContact( mysqli $db, string $contactId ): ?array {
 	}
 
 }
+
+
+function getImage( mysqli $db, int $imageId ): ?array {
+
+	try {
+
+		$query = $db->prepare( "SELECT * FROM pictures WHERE id = ?" );
+
+		$query->execute( [ $imageId ] );
+
+		$result = $query->get_result();
+
+		return $result->fetch_assoc();
+
+	} catch ( Exception $exception ) {
+
+		addErrorToLog( $exception->getMessage() );
+
+		return null;
+	}
+
+}

@@ -14,7 +14,7 @@ function mysqliCreateContact( mysqli $db, array $params ): bool {
 	try {
 
 		$statement = $db->prepare(
-			"INSERT INTO contacts (name, phone_number, email, surname, company, role, picture)
+			"INSERT INTO contacts (name, phone_number, email, surname, company, role, picture_id)
 					VALUES (?, ?, ?, ?, ?, ?, ?)" );
 
 		$name         = array_key_exists( 'name', $params ) ? $params['name'] : throw new Exception( 'Name is mandatory' );
@@ -23,7 +23,7 @@ function mysqliCreateContact( mysqli $db, array $params ): bool {
 		$surname      = array_key_exists( 'surname', $params ) ? $params['surname'] : null;
 		$company      = array_key_exists( 'company', $params ) ? $params['company'] : null;
 		$role         = array_key_exists( 'role', $params ) ? $params['role'] : null;
-		$picture      = array_key_exists( 'picture', $params ) ? $params['picture'] : null;
+		$picture_id   = array_key_exists( 'picture_id', $params ) ? $params['picture_id'] : null;
 
 		$statement->execute( [
 			$name,
@@ -32,7 +32,7 @@ function mysqliCreateContact( mysqli $db, array $params ): bool {
 			$surname,
 			$company,
 			$role,
-			$picture
+			$picture_id
 		] );
 
 		return true;
@@ -48,12 +48,13 @@ function mysqliCreateContact( mysqli $db, array $params ): bool {
 
 }
 
-function deleteContact( mysqli $db, string $contactId ): bool {
+function deleteContact( mysqli $db, string $contactId, string $email ): bool {
 
 	try {
-		$statement = $db->prepare( "UPDATE contacts SET active = 0 WHERE id = ?" );
+		$statement = $db->prepare( "UPDATE contacts SET active = 0, email = ? WHERE id = ?" );
 
 		$statement->execute( [
+			$email,
 			$contactId
 		] );
 
@@ -62,9 +63,27 @@ function deleteContact( mysqli $db, string $contactId ): bool {
 	} catch ( Exception $e ) {
 
 		addErrorToLog( $e->getMessage() );
-		addErrorToLog( implode( ',', $params ) );
 
 		return false;
 
+	}
+}
+
+function insertImage( mysqli $db, string $image ): int{
+	try {
+		//	$image = file_get_contents($_FILES['images']['tmp_name']);
+		$query = "INSERT INTO pictures (content) VALUES(?)";
+		$stmt = $db->prepare($query);
+		$stmt->bind_param('s', $image);
+		$stmt->execute();
+		$id = $db->insert_id;
+
+		return $id;
+
+	} catch (Exception $e){
+
+		addErrorToLog( $e->getMessage() );
+
+		return false;
 	}
 }

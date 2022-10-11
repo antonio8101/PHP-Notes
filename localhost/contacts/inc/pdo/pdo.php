@@ -58,6 +58,7 @@ function connectPDO( $host, $dbname, $user, $password, $port = 3306 ): ?MyPDO {
 	try {
 
 		// istanza
+		$pdo = new PDO();
 
 		//$pdo->varx;
 

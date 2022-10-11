@@ -5,3 +5,119 @@ Stack trace:
 #2 C:\projects\PHP-DOCKER-LIVE\src\objects\cloning.php(382): RaceFactory::getRace('Monza', Object(Country))
 #3 {main}
   thrown in C:\projects\PHP-DOCKER-LIVE\src\objects\cloning.php on line 140
+[04-Oct-2022 18:48:26 UTC] PHP Fatal error:  Uncaught Error: Object of class Country could not be converted to string in C:\projects\NOTES\PHP-Notes\samples\objects\cloning.php:79
+Stack trace:
+#0 C:\projects\NOTES\PHP-Notes\samples\objects\cloning.php(489): Car->__toString()
+#1 C:\projects\NOTES\PHP-Notes\samples\objects\cloning.php(462): displayCar(Object(Car))
+#2 {main}
+  thrown in C:\projects\NOTES\PHP-Notes\samples\objects\cloning.php on line 79
+[06-Oct-2022 15:31:45 UTC] PHP Fatal error:  Uncaught Exception: Serialization of 'Person@anonymous' is not allowed in C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php:26
+Stack trace:
+#0 C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php(26): serialize(Object(Person@anonymous))
+#1 {main}
+  thrown in C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php on line 26
+[06-Oct-2022 15:32:37 UTC] PHP Fatal error:  Uncaught Exception: Serialization of 'Person@anonymous' is not allowed in C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php:30
+Stack trace:
+#0 C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php(30): serialize(Object(Person@anonymous))
+#1 {main}
+  thrown in C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php on line 30
+[06-Oct-2022 15:36:53 UTC] PHP Notice:  unserialize(): Error at offset 0 of 89 bytes in C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php on line 38
+[06-Oct-2022 15:36:53 UTC] PHP Stack trace:
+[06-Oct-2022 15:36:53 UTC] PHP   1. {main}() C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php:0
+[06-Oct-2022 15:36:53 UTC] PHP   2. unserialize($data = '"O:6:"Person":3:{s:4:"name";s:7:"Antonio";s:7:"surname";s:5:"Bruno";s:3:"age";s:2:"20";}"') C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php:38
+[06-Oct-2022 15:37:12 UTC] PHP Notice:  unserialize(): Error at offset 0 of 88 bytes in C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php on line 38
+[06-Oct-2022 15:37:12 UTC] PHP Stack trace:
+[06-Oct-2022 15:37:12 UTC] PHP   1. {main}() C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php:0
+[06-Oct-2022 15:37:12 UTC] PHP   2. unserialize($data = '"O:6:"Person":3:{s:4:"name";s:7:"Antonio";s:7:"surname";s:5:"Bruno";s:3:"age";s:2:"20";}') C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php:38
+[06-Oct-2022 15:37:39 UTC] PHP Fatal error:  Uncaught Error: Class "Person" not found in C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php:19
+Stack trace:
+#0 {main}
+  thrown in C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php on line 19
+[06-Oct-2022 15:54:13 UTC] PHP Fatal error:  Uncaught TypeError: Person::__sleep(): Return value must be of type array, none returned in C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php:59
+Stack trace:
+#0 [internal function]: Person->__sleep()
+#1 C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php(71): serialize(Object(Person))
+#2 {main}
+  thrown in C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php on line 59
+[06-Oct-2022 15:55:20 UTC] PHP Warning:  serialize(): "Antonio" returned as member variable from __sleep() but does not exist in C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php on line 77
+[06-Oct-2022 15:55:20 UTC] PHP Stack trace:
+[06-Oct-2022 15:55:20 UTC] PHP   1. {main}() C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php:0
+[06-Oct-2022 15:55:20 UTC] PHP   2. serialize($value = class Person { public string $name = 'Antonio'; public string $surname = 'Bruno'; public string $age = '20' }) C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php:77
+[06-Oct-2022 15:55:20 UTC] PHP Warning:  serialize(): "Bruno" returned as member variable from __sleep() but does not exist in C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php on line 77
+[06-Oct-2022 15:55:20 UTC] PHP Stack trace:
+[06-Oct-2022 15:55:20 UTC] PHP   1. {main}() C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php:0
+[06-Oct-2022 15:55:20 UTC] PHP   2. serialize($value = class Person { public string $name = 'Antonio'; public string $surname = 'Bruno'; public string $age = '20' }) C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php:77
+[06-Oct-2022 15:55:20 UTC] PHP Warning:  serialize(): "20" returned as member variable from __sleep() but does not exist in C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php on line 77
+[06-Oct-2022 15:55:20 UTC] PHP Stack trace:
+[06-Oct-2022 15:55:20 UTC] PHP   1. {main}() C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php:0
+[06-Oct-2022 15:55:20 UTC] PHP   2. serialize($value = class Person { public string $name = 'Antonio'; public string $surname = 'Bruno'; public string $age = '20' }) C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php:77
+[06-Oct-2022 15:55:20 UTC] PHP Warning:  serialize(): Person::__sleep() should return an array only containing the names of instance-variables to serialize in C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php on line 77
+[06-Oct-2022 15:55:20 UTC] PHP Stack trace:
+[06-Oct-2022 15:55:20 UTC] PHP   1. {main}() C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php:0
+[06-Oct-2022 15:55:20 UTC] PHP   2. serialize($value = class Person { public string $name = 'Antonio'; public string $surname = 'Bruno'; public string $age = '20' }) C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php:77
+[06-Oct-2022 15:55:20 UTC] PHP Warning:  serialize(): "1665071720" returned as member variable from __sleep() but does not exist in C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php on line 77
+[06-Oct-2022 15:55:20 UTC] PHP Stack trace:
+[06-Oct-2022 15:55:20 UTC] PHP   1. {main}() C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php:0
+[06-Oct-2022 15:55:20 UTC] PHP   2. serialize($value = class Person { public string $name = 'Antonio'; public string $surname = 'Bruno'; public string $age = '20' }) C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php:77
+[06-Oct-2022 15:55:57 UTC] PHP Warning:  serialize(): "Antonio" returned as member variable from __sleep() but does not exist in C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php on line 79
+[06-Oct-2022 15:55:57 UTC] PHP Stack trace:
+[06-Oct-2022 15:55:57 UTC] PHP   1. {main}() C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php:0
+[06-Oct-2022 15:55:57 UTC] PHP   2. serialize($value = class Person { public string $name = 'Antonio'; public string $surname = 'Bruno'; public string $age = '20'; public int $serialized_at = *uninitialized* }) C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php:79
+[06-Oct-2022 15:55:57 UTC] PHP Warning:  serialize(): "Bruno" returned as member variable from __sleep() but does not exist in C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php on line 79
+[06-Oct-2022 15:55:57 UTC] PHP Stack trace:
+[06-Oct-2022 15:55:57 UTC] PHP   1. {main}() C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php:0
+[06-Oct-2022 15:55:57 UTC] PHP   2. serialize($value = class Person { public string $name = 'Antonio'; public string $surname = 'Bruno'; public string $age = '20'; public int $serialized_at = *uninitialized* }) C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php:79
+[06-Oct-2022 15:55:57 UTC] PHP Warning:  serialize(): "20" returned as member variable from __sleep() but does not exist in C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php on line 79
+[06-Oct-2022 15:55:57 UTC] PHP Stack trace:
+[06-Oct-2022 15:55:57 UTC] PHP   1. {main}() C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php:0
+[06-Oct-2022 15:55:57 UTC] PHP   2. serialize($value = class Person { public string $name = 'Antonio'; public string $surname = 'Bruno'; public string $age = '20'; public int $serialized_at = *uninitialized* }) C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php:79
+[06-Oct-2022 15:55:57 UTC] PHP Warning:  serialize(): Person::__sleep() should return an array only containing the names of instance-variables to serialize in C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php on line 79
+[06-Oct-2022 15:55:57 UTC] PHP Stack trace:
+[06-Oct-2022 15:55:57 UTC] PHP   1. {main}() C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php:0
+[06-Oct-2022 15:55:57 UTC] PHP   2. serialize($value = class Person { public string $name = 'Antonio'; public string $surname = 'Bruno'; public string $age = '20'; public int $serialized_at = *uninitialized* }) C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php:79
+[06-Oct-2022 15:55:57 UTC] PHP Warning:  serialize(): "1665071757" returned as member variable from __sleep() but does not exist in C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php on line 79
+[06-Oct-2022 15:55:57 UTC] PHP Stack trace:
+[06-Oct-2022 15:55:57 UTC] PHP   1. {main}() C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php:0
+[06-Oct-2022 15:55:57 UTC] PHP   2. serialize($value = class Person { public string $name = 'Antonio'; public string $surname = 'Bruno'; public string $age = '20'; public int $serialized_at = *uninitialized* }) C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php:79
+[06-Oct-2022 15:56:17 UTC] PHP Warning:  serialize(): "Antonio" returned as member variable from __sleep() but does not exist in C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php on line 76
+[06-Oct-2022 15:56:17 UTC] PHP Stack trace:
+[06-Oct-2022 15:56:17 UTC] PHP   1. {main}() C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php:0
+[06-Oct-2022 15:56:17 UTC] PHP   2. serialize($value = class Person { public string $name = 'Antonio'; public string $surname = 'Bruno'; public string $age = '20'; public int $serialized_at = *uninitialized* }) C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php:76
+[06-Oct-2022 15:57:23 UTC] PHP Warning:  serialize(): "Antonio" returned as member variable from __sleep() but does not exist in C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php on line 76
+[06-Oct-2022 15:57:23 UTC] PHP Stack trace:
+[06-Oct-2022 15:57:23 UTC] PHP   1. {main}() C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php:0
+[06-Oct-2022 15:57:23 UTC] PHP   2. serialize($value = class Person { public string $name = 'Antonio'; public string $surname = 'Bruno'; public string $age = '20'; public int $serialized_at = *uninitialized* }) C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php:76
+[06-Oct-2022 15:58:01 UTC] PHP Warning:  serialize(): "Antonio" returned as member variable from __sleep() but does not exist in C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php on line 69
+[06-Oct-2022 15:58:01 UTC] PHP Stack trace:
+[06-Oct-2022 15:58:01 UTC] PHP   1. {main}() C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php:0
+[06-Oct-2022 15:58:01 UTC] PHP   2. serialize($value = class Person { public string $name = 'Antonio'; public string $surname = 'Bruno'; public string $age = '20'; public int $serialized_at = *uninitialized* }) C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php:69
+[06-Oct-2022 15:58:49 UTC] PHP Warning:  serialize(): "a" returned as member variable from __sleep() but does not exist in C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php on line 69
+[06-Oct-2022 15:58:49 UTC] PHP Stack trace:
+[06-Oct-2022 15:58:49 UTC] PHP   1. {main}() C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php:0
+[06-Oct-2022 15:58:49 UTC] PHP   2. serialize($value = class Person { public string $name = 'Antonio'; public string $surname = 'Bruno'; public string $age = '20'; public int $serialized_at = *uninitialized* }) C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php:69
+[06-Oct-2022 16:00:18 UTC] PHP Warning:  serialize(): Person::__sleep() should return an array only containing the names of instance-variables to serialize in C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php on line 71
+[06-Oct-2022 16:00:18 UTC] PHP Stack trace:
+[06-Oct-2022 16:00:18 UTC] PHP   1. {main}() C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php:0
+[06-Oct-2022 16:00:18 UTC] PHP   2. serialize($value = class Person { public string $name = 'Antonio'; public string $surname = 'Bruno'; public string $age = '20'; public int $serialized_at = *uninitialized* }) C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php:71
+[06-Oct-2022 16:00:18 UTC] PHP Warning:  serialize(): "1665072018" returned as member variable from __sleep() but does not exist in C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php on line 71
+[06-Oct-2022 16:00:18 UTC] PHP Stack trace:
+[06-Oct-2022 16:00:18 UTC] PHP   1. {main}() C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php:0
+[06-Oct-2022 16:00:18 UTC] PHP   2. serialize($value = class Person { public string $name = 'Antonio'; public string $surname = 'Bruno'; public string $age = '20'; public int $serialized_at = *uninitialized* }) C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php:71
+[06-Oct-2022 16:00:35 UTC] PHP Warning:  serialize(): Person::__sleep() should return an array only containing the names of instance-variables to serialize in C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php on line 71
+[06-Oct-2022 16:00:35 UTC] PHP Stack trace:
+[06-Oct-2022 16:00:35 UTC] PHP   1. {main}() C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php:0
+[06-Oct-2022 16:00:35 UTC] PHP   2. serialize($value = class Person { public string $name = 'Antonio'; public string $surname = 'Bruno'; public string $age = '20'; public int $serialized_at = 0 }) C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php:71
+[06-Oct-2022 16:00:35 UTC] PHP Warning:  serialize(): "1665072035" returned as member variable from __sleep() but does not exist in C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php on line 71
+[06-Oct-2022 16:00:35 UTC] PHP Stack trace:
+[06-Oct-2022 16:00:35 UTC] PHP   1. {main}() C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php:0
+[06-Oct-2022 16:00:35 UTC] PHP   2. serialize($value = class Person { public string $name = 'Antonio'; public string $surname = 'Bruno'; public string $age = '20'; public int $serialized_at = 0 }) C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php:71
+[06-Oct-2022 16:02:04 UTC] PHP Fatal error:  Uncaught TypeError: unserialize(): Argument #1 ($data) must be of type string, Person given in C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php:71
+Stack trace:
+#0 C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php(71): unserialize(Object(Person))
+#1 {main}
+  thrown in C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php on line 71
+[06-Oct-2022 16:36:37 UTC] PHP Fatal error:  Uncaught ArgumentCountError: json_decode() expects at least 1 argument, 0 given in C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php:88
+Stack trace:
+#0 C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php(88): json_decode()
+#1 {main}
+  thrown in C:\projects\NOTES\PHP-Notes\samples\objects\serialize_example.php on line 88

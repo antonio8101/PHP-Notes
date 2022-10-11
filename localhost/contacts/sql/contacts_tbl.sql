@@ -21,3 +21,12 @@ ALTER TABLE contacts ADD FULLTEXT (name,surname,email);
 ALTER TABLE contacts ADD CONSTRAINT UNIQUE(email);
 
 ALTER TABLE contacts ADD active bool not null default (1);
+
+# Adds table to store images in blob..
+create table pictures (
+                          id int  not null auto_increment primary key,
+                          content longblob not null,
+                          created_at timestamp default CURRENT_TIMESTAMP
+);
+ALTER TABLE contacts ADD picture_id INT null;
+ALTER TABLE contacts ADD FOREIGN KEY (picture_id) references pictures(id);

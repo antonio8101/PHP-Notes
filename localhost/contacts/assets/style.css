@@ -30,6 +30,22 @@ input[type=submit] {
     border-radius: 50%;
     width: 70px;
     margin-right: 10px;
+    outline: 1px solid rgba(0,0,0,0.176);
+    outline-offset: 2px;
+}
+
+.profile-pic-big{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.profile-pic-big img{
+    border-radius: 50%;
+    width: 150px;
+    margin-right: 10px;
+    /*border: solid 3px #ddd;*/
+    outline: 1px solid rgba(0,0,0,0.176);
+    outline-offset: 5px;
 }
 
 .form-buttons a{
@@ -64,4 +80,22 @@ input[type=submit] {
 
 .create-btn a:hover{
     background-color: #1100ff;
+}
+
+.view div:not(.custom-file-button) {
+    display: flex;
+}
+
+.view div i {
+    font-size: 20px;
+    margin-right: 20px;
+    margin-left: 10px;
+}
+
+.view div input:disabled:not([type=submit]) {
+    border-left: 0;
+    border-top: 0;
+    border-right: 0;
+    background-color: transparent;
+    border-radius: 0;
 }

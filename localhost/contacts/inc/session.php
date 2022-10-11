@@ -9,8 +9,6 @@ function startSession( ?array $initialSessionData = null ): void {
 		}
 	}
 
-//	var_dump($_SESSION);
-
 }
 
 function endSession(): void {

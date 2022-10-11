@@ -2,22 +2,25 @@
 
 require_once "inc/config.inc.php";
 require_once "inc/helper.inc.php";
-// require_once "inc/pdo/pdo.php";
-// require_once "inc/pdo/command.php";
 require_once "inc/mysqli/mysqli.php";
 require_once "inc/mysqli/command.php";
 require_once "inc/session.php";
 
-if ( function_exists( 'startSession' ) ) {
-	startSession( $_POST );
-}
+require_once "templates.php";
+
+require_once "inc/common.php";
 
 $invalidFields  = getInvalidFields( $_POST );
 $isOk           = ! ( count( $invalidFields ) > 0 );
 $contactCreated = true;
 
 if ( $isOk && isProcessingForm() ) {
-	$_POST['picture'] = uploadImage( $_FILES );
+
+    $pictureId = uploadImage( $_FILES );
+
+    if (!is_null($pictureId)) {
+	    $_POST['picture_id'] = $pictureId;
+    }
 
 	if ( function_exists( 'connectPDO' ) ) {
 		$contactCreated = createContactWithPDO( $_POST );
@@ -31,31 +34,13 @@ if ( $isOk && isProcessingForm() ) {
 }
 
 /** IMAGE */
-function uploadImage( array $files ): ?string {
+function uploadImage( array $files ): ?int {
 	try {
-		$originalFileName = explode( ".", $files['profilePic']['name'] );
-		$extension        = $originalFileName[ count( $originalFileName ) - 1 ];
-		$guid             = getSomethingLikeGuid( true );
-		$fileName         = "{$guid}.{$extension}";
-		$uploadFolder     = "uploads";
-		$path             = "uploads/{$fileName}";
-
-		makeDirectoryIfNotExists( $uploadFolder );
-
-		move_uploaded_file( $files['profilePic']['tmp_name'], $path );
-
-		if ( ! is_readable( $path ) ) {
-			throw new Exception( "File created is not readable" );
-		}
-
-		if ( isWindowsServer() ) {
-			exec( 'icacls "' . $path . '" /q /c /reset' );
-		}
-
-		return $path;
+		$file = file_get_contents($files['profilePic']['tmp_name']);
+		$db = connectMySQLi( DB_HOST, DB_PORT, DB_USER, DB_PASS, DB_NAME );
+		return insertImage($db, $file);
 	} catch ( Exception $exception ) {
-		//var_dump( $exception->getMessage() );
-
+		addErrorToLog( $exception->getMessage() );
 		return null;
 	}
 }
@@ -141,15 +126,6 @@ function validateEmail( $value ): bool {
 
 /** HELPERS */
 
-function getValue( string $fieldName ): ?string {
-
-	if ( array_key_exists( $fieldName, $_POST ) ) {
-		return $_POST[ $fieldName ];
-	}
-
-	return null;
-}
-
 function alertIfInvalid( string $nameOfField, array $invalidFields ): ?string {
 
 	if ( array_key_exists( $nameOfField, $invalidFields ) ) {
@@ -212,23 +188,10 @@ function createContactWithMySQLi( array $params ): bool {
 }
 
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title><?= getPageTitle() ?></title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
-            crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="assets/style.css">
-</head>
-<body>
-<div class="container">
-	<?php
-	if ( isProcessingForm() && $isOk && $contactCreated ): ?>
+
+<?= getPageHeader(getPageTitle()) ?>
+
+<?php if ( isProcessingForm() && $isOk && $contactCreated ): ?>
 
         <div class="card-container ">
             <div class="create-form card m-3">
@@ -243,8 +206,7 @@ function createContactWithMySQLi( array $params ): bool {
         <div class="centered"><a href="<?= $_SERVER['PHP_SELF'] ?>">Inserisci un nuovo contatto</a></div>
         <div class="centered"><a href="list.php">Lista contatti</a></div>
 
-
-	<?php else: ?>
+<?php else: ?>
 
         <div class="card-container ">
             <div class="create-form card m-3">
@@ -266,42 +228,42 @@ function createContactWithMySQLi( array $params ): bool {
                         <div class="mt-3">
                             <input type="text" class="form-control <?= alertIfInvalid( 'name', $invalidFields ) ?>"
                                    name="name"
-                                   value="<?= getValue( 'name', $invalidFields ) ?>" id="name"
+                                   value="<?= getValue( 'name', $_POST ) ?>" id="name"
                                    oninput="removeInvalid(this)"
                                    placeholder="Mario" required>
                         </div>
                         <div class="mt-3">
                             <input type="text" class="form-control <?= alertIfInvalid( 'surname', $invalidFields ) ?>"
-                                   name="surname" value="<?= getValue( 'surname', $invalidFields ) ?>" id="surname"
+                                   name="surname" value="<?= getValue( 'surname', $_POST ) ?>" id="surname"
                                    oninput="removeInvalid(this)" placeholder="Rossi">
                         </div>
                         <div class="mt-3">
                             <input type="text"
                                    class="form-control form-control <?= alertIfInvalid( 'phone', $invalidFields ) ?>"
-                                   value="<?= getValue( 'phone', $invalidFields ) ?>" oninput="removeInvalid(this)"
+                                   value="<?= getValue( 'phone', $_POST ) ?>" oninput="removeInvalid(this)"
                                    id="number"
                                    name="phone" placeholder="02 2021010" required>
                         </div>
                         <div class="mt-3">
                             <input type="text"
                                    class="form-control form-control <?= alertIfInvalid( 'email', $invalidFields ) ?>"
-                                   value="<?= getValue( 'email', $invalidFields ) ?>" name="email"
+                                   value="<?= getValue( 'email', $_POST ) ?>" name="email"
                                    oninput="removeInvalid(this)"
                                    id="email" placeholder="Email" required>
                         </div>
                         <div class="mt-3">
                             <input type="text" class="form-control <?= alertIfInvalid( 'company', $invalidFields ) ?>"
-                                   value="<?= getValue( 'company', $invalidFields ) ?>" name="company" id="company"
+                                   value="<?= getValue( 'company', $_POST ) ?>" name="company" id="company"
                                    oninput="removeInvalid(this)" placeholder="Società">
                         </div>
                         <div class="mt-3">
                             <input type="text" class="form-control <?= alertIfInvalid( 'role', $invalidFields ) ?>"
-                                   value="<?= getValue( 'role', $invalidFields ) ?>" name="role" id="role"
+                                   value="<?= getValue( 'role', $_POST ) ?>" name="role" id="role"
                                    oninput="removeInvalid(this)" placeholder="Qualifica">
                         </div>
                         <div class="mt-3">
                             <input type="text" class="form-control <?= alertIfInvalid( 'birthdate', $invalidFields ) ?>"
-                                   value="<?= getValue( 'birthdate', $invalidFields ) ?>" name="birthdate"
+                                   value="<?= getValue( 'birthdate', $_POST ) ?>" name="birthdate"
                                    id="birthdate"
                                    oninput="removeInvalid(this)" placeholder="Data di Nascita">
                         </div>
@@ -313,21 +275,17 @@ function createContactWithMySQLi( array $params ): bool {
                 </div>
             </div>
         </div>
-	<?php endif ?>
-</div>
-<script>
 
-    function removeInvalid(elm) {
-        elm.classList.remove('is-invalid');
-    }
+    <script>
+        function removeInvalid(elm) {
+            elm.classList.remove('is-invalid');
+        }
+    </script>
 
-</script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
-        integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz"
-        crossorigin="anonymous"></script>
-</body>
-</html>
+<?php endif ?>
+
+<?= getPageFooter() ?>
+
+
+
 <?php unset($_SESSION['errors']);  ?>

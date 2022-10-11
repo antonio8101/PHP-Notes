@@ -1,0 +1,3 @@
+<?php
+
+startSession( $_POST );

@@ -26,6 +26,25 @@ function getPageTitle( ?string $sectionTitle = null ): string {
 	return $pageTitle;
 }
 
+function getPageHeader(string $title): string {
+	$template = HEADER;
+	return str_replace( '#title', $title, $template );
+}
+
+function getPageFooter(string $scripts = ""): string {
+	$template = FOOTER;
+	return str_replace( '#scripts', $scripts, $template );
+}
+
+function getValue( string $fieldName, array $values ): ?string {
+
+	if ( array_key_exists( $fieldName, $values ) ) {
+		return $values[ $fieldName ];
+	}
+
+	return null;
+}
+
 function getScriptNameFromServerVariables(): array|string {
 	$scriptArr  = explode( '\\', $_SERVER['SCRIPT_FILENAME'] );
 	$scriptName = str_replace( '.php', '', $scriptArr[ array_key_last( $scriptArr ) ] );
