@@ -25,6 +25,9 @@ interface ImageService {
 
 class ImageDbService implements ImageService {
 
+	const TABLE_NAME = 'pictures';
+	const TABLE_RELATED_FIELD = 'picture_id';
+
 	private mysqli $db;
 
 	public function __construct( mysqli $db ) {
@@ -64,7 +67,7 @@ class ImageDbService implements ImageService {
 
 	public static function CreateImageTable( mysqli $db, string $aggregateTableName = null ) {
 
-		$imageTable = 'pictures';
+		$imageTable = self::TABLE_NAME;
 
 		$query = "CREATE TABLE IF NOT EXISTS {$imageTable} (
                   id int  not null auto_increment primary key,
@@ -77,9 +80,9 @@ class ImageDbService implements ImageService {
 
 		if ( ! is_null( $aggregateTableName ) ) {
 
-			self::TryCreateField( $db, $aggregateTableName, 'picture_id' );
+			self::TryCreateField( $db, $aggregateTableName );
 
-			self::TryCreateFieldConstraint( $db, $aggregateTableName, 'picture_id', $imageTable );
+			self::TryCreateFieldConstraint( $db, $aggregateTableName, $imageTable );
 
 		}
 
@@ -126,8 +129,9 @@ class ImageDbService implements ImageService {
 
 	}
 
-	private static function TryCreateField( mysqli $db, string $table, string $field ): void {
+	private static function TryCreateField( mysqli $db, string $table): void {
 		try {
+			$field = self::TABLE_RELATED_FIELD;
 			$query = "ALTER TABLE {$table} ADD {$field} INT null ;";
 			$stmt  = $db->prepare( $query );
 			$stmt->execute();
@@ -137,8 +141,9 @@ class ImageDbService implements ImageService {
 		}
 	}
 
-	private static function TryCreateFieldConstraint( mysqli $db, string $table, string $field, string $imageTable ) {
+	private static function TryCreateFieldConstraint( mysqli $db, string $table, string $imageTable ) {
 		try {
+			$field = self::TABLE_RELATED_FIELD;
 			$query = "ALTER TABLE {$table} ADD CONSTRAINT fk_picture_id FOREIGN KEY ({$field}) references {$imageTable}(id);";
 			$stmt  = $db->prepare( $query );
 			$stmt->execute();
