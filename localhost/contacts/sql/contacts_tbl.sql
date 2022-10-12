@@ -26,6 +26,7 @@ ALTER TABLE contacts ADD active bool not null default (1);
 create table pictures (
                           id int  not null auto_increment primary key,
                           content longblob not null,
+                          type varchar(150) null,
                           created_at timestamp default CURRENT_TIMESTAMP
 );
 ALTER TABLE contacts ADD picture_id INT null;

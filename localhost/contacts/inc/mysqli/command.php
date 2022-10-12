@@ -71,7 +71,6 @@ function deleteContact( mysqli $db, string $contactId, string $email ): bool {
 
 function insertImage( mysqli $db, string $image ): int{
 	try {
-		//	$image = file_get_contents($_FILES['images']['tmp_name']);
 		$query = "INSERT INTO pictures (content) VALUES(?)";
 		$stmt = $db->prepare($query);
 		$stmt->bind_param('s', $image);

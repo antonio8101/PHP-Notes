@@ -10,6 +10,7 @@ require_once "templates.php";
 
 require_once "inc/common.php";
 
+
 $invalidFields  = getInvalidFields( $_POST );
 $isOk           = ! ( count( $invalidFields ) > 0 );
 $contactCreated = true;
@@ -34,47 +35,26 @@ if ( $isOk && isProcessingForm() ) {
 }
 
 /** IMAGE */
-function uploadImage( array $files ): ?int {
+
+function uploadImage( array $files ): string|null {
+
+
 	try {
-		$file = file_get_contents($files['profilePic']['tmp_name']);
-		$db = connectMySQLi( DB_HOST, DB_PORT, DB_USER, DB_PASS, DB_NAME );
-		return insertImage($db, $file);
+
+		$file = $files['profilePic'];
+
+		$db       = connectMySQLi( DB_HOST, DB_PORT, DB_USER, DB_PASS, DB_NAME );
+		$imageDto = new ImageDto( $file['name'], $file['type'], $file['tmp_name'] );
+		$service  = new ImageDbService( $db );
+
+		return $service->set( $imageDto );
+
 	} catch ( Exception $exception ) {
+
 		addErrorToLog( $exception->getMessage() );
+
 		return null;
 	}
-}
-
-function makeDirectoryIfNotExists( string $path ): void {
-	if ( ! is_dir( $path ) ) {
-		mkdir( $path, 0777, true );
-	}
-}
-
-function isWindowsServer(): bool {
-	if ( strtoupper( substr( PHP_OS, 0, 3 ) ) === 'WIN' ) {
-		return true;
-	} else {
-		return false;
-	}
-}
-
-function getSomethingLikeGuid( bool $trim ): string {
-
-	mt_srand( (int) microtime() * 10000 );
-	$charid = strtolower( md5( uniqid( rand(), true ) ) );
-	$hyphen = chr( 45 );                  // "-"
-	$lbrace = $trim ? "" : chr( 123 );    // "{"
-	$rbrace = $trim ? "" : chr( 125 );    // "}"
-	$guidv4 = $lbrace .
-	          substr( $charid, 0, 8 ) . $hyphen .
-	          substr( $charid, 8, 4 ) . $hyphen .
-	          substr( $charid, 12, 4 ) . $hyphen .
-	          substr( $charid, 16, 4 ) . $hyphen .
-	          substr( $charid, 20, 12 ) .
-	          $rbrace;
-
-	return $guidv4;
 }
 
 /** VALIDATION */

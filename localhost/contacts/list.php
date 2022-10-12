@@ -32,26 +32,9 @@ $queryResult = searchContacts( $db, $searchKey );
                     <?php $counter = 0; ?>
                     <?php if ($queryResult): ?>
 					<?php while ( $row = $queryResult->fetch_assoc() ): ?>
-						<?php
-
-						$nameInitial        = $row['name'][0];
-						$surnameInitial     = substr( $row['surname'], 0, 1 );
-						$placeHolderContent = $nameInitial . $surnameInitial;
-
-                        if (!is_null($row['picture_id'])){
-	                        $image = getImage( $db, $row['picture_id'] );
-	                        $row['picture_id'] = $image['content'];
-                        }
-
-						?>
-                        <a href="#" class="d-flex list-group-item list-group-item-action" aria-current="true">
+						<a href="view.php?contactId=<?= $row['id']?>" class="d-flex list-group-item list-group-item-action" aria-current="true">
                             <div class="profile-pic me-2">
-								<?php if ( ! is_null( $row['picture_id'] ) && strlen( $row['picture_id'] ) > 0) : ?>
-                                    <img src="data:image/jpeg;base64,<?= base64_encode($row['picture_id'] )?>" alt="pic-image">
-								<?php else: ?>
-                                    <img src="https://via.placeholder.com/150/0000FF/808080?text=<?= $placeHolderContent ?>"
-                                         alt="pic-image">
-								<?php endif; ?>
+								<img src="<?= getProfileImage($row) ?>" alt="pic-image">
                             </div>
                             <div>
                                 <div class="w-100 mb-1">
@@ -71,44 +54,42 @@ $queryResult = searchContacts( $db, $searchKey );
                     </div>
 	                <?php endif; ?>
 
-                    <!-- /SINGLE CONTACT -->
+
+                    <script>
+                        window.addEventListener('load', function () {
+                            const url = new URL(window.location.href);
+                            const searchParam = url.search.replace('?search=', '');
+
+                            if (searchParam.length > 0) {
+                                const elm = document.getElementById('searchText');
+
+                                if (searchParam.length > 0) {
+
+                                    elm.focus();
+                                    elm.value = searchParam;
+                                }
+                            }
+                        })
+
+                        function refreshList(elm) {
+                            location.href = location.origin + location.pathname + '?' + 'search=' + elm.value;
+                        }
+
+                        function debounce(func, timeout = 10) {
+                            let timer;
+                            return (...args) => {
+                                clearTimeout(timer);
+                                timer = setTimeout(() => {
+                                    func.apply(this, args);
+                                }, timeout);
+                            };
+                        }
+
+                        const processChange = debounce((elm) => refreshList(elm));
+                    </script>
                 </div>
             </div>
         </div>
     </div>
 
-<?= getPageFooter(<<< heredoc
-    <script>
-
-        window.addEventListener('load', function () {
-            const url = new URL(window.location.href);
-            const searchParam = url.search.replace('?search=', '');
-
-            if (searchParam.length > 0) {
-                const elm = document.getElementById('searchText');
-
-                if (searchParam.length > 0) {
-
-                    elm.focus();
-                    elm.value = searchParam;
-                }
-            }
-        })
-
-        function refreshList(elm) {
-            location.href = location.origin + location.pathname + '?' + 'search=' + elm.value;
-        }
-
-        function debounce(func, timeout = 10) {
-            let timer;
-            return (...args) => {
-                clearTimeout(timer);
-                timer = setTimeout(() => {
-                    func.apply(this, args);
-                }, timeout);
-            };
-        }
-
-        const processChange = debounce((elm) => refreshList(elm));
-    </script>
-heredoc) ?>
+<?= getPageFooter() ?>
